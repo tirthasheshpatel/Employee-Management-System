@@ -1,0 +1,14 @@
+Last Modified: Tue Nov 05 15:15:51 IST 2019
+
+ --- Organization Details ---
+Organization: Google
+Date of Establishment: Mon Dec 12 00:00:00 IST 1994
+Address: NYC, USA
+Read more about us on: https://www.google.com/
+Size of company: 50000 employees
+Number of Appointed employees: 2
+Number of Vacant seats: 49998
+
+ --- Employee Details ---
+name: Tirth Patel, id: 18BCE243, more details in the file: 18BCE243.txt
+name: Tirth Hi, id: 18BCE244, more details in the file: 18BCE244.txt

@@ -1,0 +1,12 @@
+Last Modified: Tue Nov 05 15:15:51 IST 2019
+
+ --- Employee Details ---
+Name: Tirth Patel
+ID: 18BCE243
+Address: West Virginia, USA
+Organization: com.EMS.core.Organization@6e2c634b
+Occupation: Software Engineer
+Account: 1880-1994-1985-1977
+Salary: 6000.0
+Bonus: 200.0
+Total: 6200.0
