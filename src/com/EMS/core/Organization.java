@@ -2,6 +2,9 @@ package com.EMS.core;
 
 import java.util.*;
 import java.util.regex.Pattern;
+
+import javax.naming.NameNotFoundException;
+
 import java.util.regex.Matcher;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -45,6 +48,16 @@ public class Organization implements BaseOrganization
         this.setNumEmployees(numEmployees);
         this.setDateOfEstablishment(date, format);
         this.isAllSet = true;
+    }
+
+    public int getNumAppointed()
+    {
+        return this.numAppointed;
+    }
+
+    public int getNumVacant()
+    {
+        return this.numVacant;
     }
 
     public void setName(String name)
@@ -185,6 +198,31 @@ public class Organization implements BaseOrganization
         this.e[numAppointed-1] = emp;
     }
 
+    public Employee searchEmployeeById(String id)
+    {
+        for(int i=0;i<this.numAppointed;i++)
+        {
+            if(id == e[i].getId())
+            {
+                return e[i];
+            }
+        }
+        throw new IllegalArgumentException("Employee with id " + id + " not found in the database of organization " + this.name);
+    }
+
+    public Employee searchEmployeeByName(String name)
+    {
+        name = name.toLowerCase();
+        for(int i=0;i<this.numAppointed;i++)
+        {
+            if(name == e[i].getName().toLowerCase())
+            {
+                return e[i];
+            }
+        }
+        throw new IllegalArgumentException("Employee with name " + name + " not found in the database of organization " + this.name);
+    }
+
     public Employee[] getEmployeeDetails()
     {
         return this.e;
@@ -208,5 +246,6 @@ public class Organization implements BaseOrganization
             System.out.println(".");
             e[this.numAppointed-1].pPrint(false, false);
         }
+        System.out.println();
     }
 }
