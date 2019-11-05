@@ -162,13 +162,13 @@ public class Employee implements BaseEmployee
             System.out.println("Salary: " + this.salary);
             System.out.println("Bonus: " + this.bonus);
             System.out.println("Total: " + this.total);
-            System.out.println();
         }
         if(print_org_det)
         {
             System.out.println("--- Organization Details ---");
             this.org.pPrint(false);
         }
+        System.out.println();
     }
 
 }
