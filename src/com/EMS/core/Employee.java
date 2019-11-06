@@ -1,11 +1,18 @@
 package com.EMS.core;
 
+import java.io.Serializable;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.*;
 import com.EMS._abstract.BaseEmployee;
 import com.EMS.iomanager.IOManagerEmployee;
 
-public class Employee implements BaseEmployee
+public class Employee implements BaseEmployee, Serializable
 {
+    private static final long serialVersionUID = 12324567854L;
     private String name;
     private String id;
     private String address;
@@ -16,7 +23,7 @@ public class Employee implements BaseEmployee
     private double bonus;
     private double total;
     private boolean status;
-    private IOManagerEmployee ioe;
+    transient private IOManagerEmployee ioe;
 
     public Employee()
     {
@@ -182,4 +189,44 @@ public class Employee implements BaseEmployee
         this.ioe.save();
     }
 
+    public void serialize()
+    {
+        String filename = this.name + ".ser";
+        try
+        {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            
+            out.writeObject(this); 
+            
+            out.close(); 
+            file.close(); 
+            
+            System.out.println("Object has been serialized");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static Employee deserialize(String filename)
+    {
+        try
+        {
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(file);
+            
+            Employee e = (Employee)in.readObject();
+            
+            in.close();
+            file.close();
+            return e;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

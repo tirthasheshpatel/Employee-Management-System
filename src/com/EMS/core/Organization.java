@@ -1,5 +1,10 @@
 package com.EMS.core;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -9,8 +14,9 @@ import java.text.SimpleDateFormat;
 import com.EMS._abstract.BaseOrganization;
 import com.EMS.iomanager.IOManagerOrganization;
 
-public class Organization implements BaseOrganization
+public class Organization implements BaseOrganization, Serializable
 {
+    private static final long serialVersionUID = 10934356412L;
     private String name;
     private String address;
     private String link;
@@ -20,7 +26,7 @@ public class Organization implements BaseOrganization
     private int numAppointed;
     private int numVacant;
     private boolean isAllSet;
-    private IOManagerOrganization ioo;
+    transient private IOManagerOrganization ioo;
 
     public Organization()
     {
@@ -257,5 +263,46 @@ public class Organization implements BaseOrganization
             this.ioo = new IOManagerOrganization(path, filename, this);
         }
         this.ioo.save();
+    }
+
+    public void serialize()
+    {
+        String filename = this.name + ".ser";
+        try
+        {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            
+            out.writeObject(this);
+            
+            out.close(); 
+            file.close(); 
+            
+            System.out.println("Object has been serialized"); 
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static Organization deserialize(String filename)
+    {
+        try
+        {
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(file);
+            
+            Organization org = (Organization)in.readObject();
+            
+            in.close();
+            file.close();
+            return org;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
