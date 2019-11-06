@@ -203,7 +203,7 @@ public class IOManagerEmployee implements IOManager
         //     String name = data[1];
         //     String 
         // }
-        String pas = "";
+        String pass = "";
         return pass;
     }
 
