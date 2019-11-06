@@ -23,6 +23,9 @@
  * 
  */
 
+/**
+ * Core package for base classes of Organization and Employee.
+ */
 package com.EMS.core;
 
 import java.io.FileOutputStream;
@@ -39,6 +42,9 @@ import java.text.SimpleDateFormat;
 import com.EMS._abstract.BaseOrganization;
 import com.EMS.iomanager.IOManagerOrganization;
 
+/**
+ * 
+ */
 public class Organization implements BaseOrganization, Serializable
 {
     private static final long serialVersionUID = 10934356412L;
