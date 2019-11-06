@@ -2,29 +2,38 @@ package com.EMS.iomanager;
 
 import java.util.*;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.FileReader;
 import com.EMS.core.Employee;
 import com.EMS.core.Organization;
 import com.EMS._abstract.IOManager;
 
 public class IOManagerEmployee implements IOManager
 {
-    String path;
-    String filename;
-    Employee emp;
-    File f;
-    FileWriter fw;
-    BufferedWriter bw;
+    private String path;
+    private String filename;
+    private Employee emp;
+    private File f;
+    private FileWriter fw;
+    private FileReader fr;
+    private BufferedWriter bw;
+    private BufferedReader br;
 
     public IOManagerEmployee()
     {
         this.path = "C:\\";
-        this.filename = "<id>.txt";
+        this.filename = "employee.txt";
         this.emp = new Employee();
         this.f = null;
         this.fw = null;
+        this.fr = null;
         this.bw = null;
+        this.br = null;
     }
 
     public IOManagerEmployee(String path,
@@ -35,7 +44,9 @@ public class IOManagerEmployee implements IOManager
         this.setFileName(filename);
         this.setEmployee(emp);
         this.fw = null;
+        this.fr = null;
         this.bw = null;
+        this.br = null;
     }
 
     public void setEmployee(Employee emp)
@@ -50,7 +61,24 @@ public class IOManagerEmployee implements IOManager
 
     public void setPath(String path)
     {
+        this.validatePath(path);
         this.path = path;
+    }
+
+    private void validatePath(String path)
+    {
+        try
+        {
+            File dir = new File(path);
+            if(!dir.exists())
+            {
+                dir.mkdirs();
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getPath()
@@ -164,7 +192,18 @@ public class IOManagerEmployee implements IOManager
 
     public String readFromFile()
     {
-        String pass = "";
+        // this.fr = new FileReader(this.f);
+        // this.br = new BufferedReader(this.fr);
+        // String parsed_data = "";
+        // String line;
+        // while(null != (line=this.br.readLine()))
+        // {
+        //     String data[] = line.split(",");
+        //     String id = data[0];
+        //     String name = data[1];
+        //     String 
+        // }
+        String pas = "";
         return pass;
     }
 

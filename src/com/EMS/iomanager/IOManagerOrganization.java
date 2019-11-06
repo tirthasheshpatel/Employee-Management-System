@@ -2,6 +2,9 @@ package com.EMS.iomanager;
 
 import java.util.*;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import com.EMS.core.Employee;
@@ -10,12 +13,12 @@ import com.EMS._abstract.IOManager;
 
 public class IOManagerOrganization implements IOManager
 {
-    String path;
-    String filename;
-    Organization org;
-    File f;
-    FileWriter fw;
-    BufferedWriter bw;
+    private String path;
+    private String filename;
+    private Organization org;
+    private File f;
+    private FileWriter fw;
+    private BufferedWriter bw;
 
     public IOManagerOrganization()
     {
@@ -48,7 +51,25 @@ public class IOManagerOrganization implements IOManager
 
     public void setPath(String path)
     {
+        this.validatePath(path);
         this.path = path;
+    }
+
+    private void validatePath(String path)
+    {
+        try
+        {
+            File dir = new File(path);
+            if(!dir.exists())
+            {
+                boolean success = dir.mkdirs();
+                System.out.println(success);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getPath()
