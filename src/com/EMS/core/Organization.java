@@ -2,14 +2,12 @@ package com.EMS.core;
 
 import java.util.*;
 import java.util.regex.Pattern;
-
-import javax.naming.NameNotFoundException;
-
 import java.util.regex.Matcher;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import com.EMS._abstract.BaseOrganization;
+import com.EMS.iomanager.IOManagerOrganization;
 
 public class Organization implements BaseOrganization
 {
@@ -22,6 +20,7 @@ public class Organization implements BaseOrganization
     private int numAppointed;
     private int numVacant;
     private boolean isAllSet;
+    private IOManagerOrganization ioo;
 
     public Organization()
     {
@@ -32,7 +31,8 @@ public class Organization implements BaseOrganization
         this.numAppointed = 0;
         this.numVacant = 0;
         this.isAllSet = false;
-        e = null;
+        this.e = null;
+        this.ioo = null;
     }
 
     public Organization(String name,
@@ -47,6 +47,7 @@ public class Organization implements BaseOrganization
         this.setAddress(address);
         this.setNumEmployees(numEmployees);
         this.setDateOfEstablishment(date, format);
+        this.ioo = null;
         this.isAllSet = true;
     }
 
@@ -247,5 +248,14 @@ public class Organization implements BaseOrganization
             e[this.numAppointed-1].pPrint(false, false);
         }
         System.out.println();
+    }
+
+    public void save(String path, String filename)
+    {
+        if(null == this.ioo)
+        {
+            this.ioo = new IOManagerOrganization(path, filename, this);
+        }
+        this.ioo.save();
     }
 }

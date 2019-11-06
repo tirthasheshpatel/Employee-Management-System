@@ -2,6 +2,7 @@ package com.EMS.core;
 
 import java.util.*;
 import com.EMS._abstract.BaseEmployee;
+import com.EMS.iomanager.IOManagerEmployee;
 
 public class Employee implements BaseEmployee
 {
@@ -15,6 +16,7 @@ public class Employee implements BaseEmployee
     private double bonus;
     private double total;
     private boolean status;
+    private IOManagerEmployee ioe;
 
     public Employee()
     {
@@ -169,6 +171,15 @@ public class Employee implements BaseEmployee
             this.org.pPrint(false);
         }
         System.out.println();
+    }
+
+    public void save(String path, String filename)
+    {
+        if(null == this.ioe)
+        {
+            this.ioe = new IOManagerEmployee(path, filename, this);
+        }
+        this.ioe.save();
     }
 
 }
