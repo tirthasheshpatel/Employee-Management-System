@@ -1,8 +1,6 @@
 import java.util.*;
 import com.EMS.core.Organization;
 import com.EMS.core.Employee;
-import com.EMS.iomanager.IOManagerEmployee;
-import com.EMS.iomanager.IOManagerOrganization;
 
 class Testing
 {
@@ -15,9 +13,11 @@ class Testing
         org.setEmployeeDetails(e2);
         org.pPrint(true);
         // org.setNumEmployees(-1);
-        IOManagerEmployee ioe = new IOManagerEmployee("C:\\Users\\tirth\\Desktop\\Employee Management System\\saved_employee_data", "tirth.txt", e1);
-        ioe.save();
-        IOManagerOrganization ioo = new IOManagerOrganization("C:\\Users\\tirth\\Desktop\\Employee Management System\\saved_organization_data", "org_data.txt", org);
-        ioo.save();
+        String path = "C:\\Users\\tirth\\Desktop\\Employee Management System\\saved_organization_data";
+        String filename = "org_data.txt";
+        org.save(path, filename);
+        Employee e3 = new Employee("Tirth R", "18BCE245", "East Viriginia, USA", org, "Graphics Engineer", "1900-1997-1985-1877", 7000.0, 3400.0, true);
+        org.setEmployeeDetails(e3);
+        org.save(path, filename);
     }
 }
