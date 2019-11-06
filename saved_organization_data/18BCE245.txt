@@ -1,0 +1,12 @@
+Last Modified: Wed Nov 06 09:53:39 IST 2019
+
+ --- Employee Details ---
+Name: Tirth R
+ID: 18BCE245
+Address: East Viriginia, USA
+Organization: com.EMS.core.Organization@2e0fa5d3
+Occupation: Graphics Engineer
+Account: 1900-1997-1985-1877
+Salary: 7000.0
+Bonus: 3400.0
+Total: 10400.0
