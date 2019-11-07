@@ -27,15 +27,10 @@ package com.EMS.iomanager;
 
 import java.util.*;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.FileReader;
+
 import com.EMS.core.Employee;
-import com.EMS.core.Organization;
 import com.EMS._abstract.IOManager;
 
 public class IOManagerEmployee implements IOManager
@@ -45,33 +40,23 @@ public class IOManagerEmployee implements IOManager
     private Employee emp;
     private File f;
     private FileWriter fw;
-    private FileReader fr;
     private BufferedWriter bw;
-    private BufferedReader br;
 
-    public IOManagerEmployee()
-    {
+    public IOManagerEmployee() {
         this.path = "C:\\";
         this.filename = "employee.txt";
         this.emp = new Employee();
         this.f = null;
         this.fw = null;
-        this.fr = null;
         this.bw = null;
-        this.br = null;
     }
 
-    public IOManagerEmployee(String path,
-                             String filename,
-                             Employee emp)
-    {
+    public IOManagerEmployee(String path, String filename, Employee emp) {
         this.setPath(path);
         this.setFileName(filename);
         this.setEmployee(emp);
         this.fw = null;
-        this.fr = null;
         this.bw = null;
-        this.br = null;
     }
 
     public void setEmployee(Employee emp)
