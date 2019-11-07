@@ -33,7 +33,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.Date;
@@ -56,36 +55,26 @@ public class Organization implements BaseOrganization, Serializable
     private Employee e[];
     private int numAppointed;
     private int numVacant;
-    private boolean isAllSet;
     transient private IOManagerOrganization ioo;
 
-    public Organization()
-    {
+    public Organization() {
         this.name = "<placeholder>";
         this.address = "<placeholder>";
         this.link = "https://www.placeholder.com/";
         this.numEmployees = 0;
         this.numAppointed = 0;
         this.numVacant = 0;
-        this.isAllSet = false;
         this.e = null;
         this.ioo = null;
     }
 
-    public Organization(String name,
-                        String link,
-                        String address,
-                        int numEmployees,
-                        String date,
-                        String format)
-    {
+    public Organization(String name, String link, String address, int numEmployees, String date, String format) {
         this.setName(name);
         this.setLink(link);
         this.setAddress(address);
         this.setNumEmployees(numEmployees);
         this.setDateOfEstablishment(date, format);
         this.ioo = null;
-        this.isAllSet = true;
     }
 
     public int getNumAppointed()
