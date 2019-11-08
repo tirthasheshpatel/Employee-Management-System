@@ -112,6 +112,7 @@ public class Employee implements BaseEmployee, Serializable
     public void setOrg(Organization org)
     {
         this.org = org;
+        org.setEmployeeDetails(this);
     }
 
     public String getId()
@@ -190,15 +191,14 @@ public class Employee implements BaseEmployee, Serializable
         System.out.println("Available: " + this.status);
         if(print_critical_info)
         {
-            System.out.println("/!\\CRITICAL INFORMATION/!\\");
+            System.out.println("\n /!\\ CRITICAL INFORMATION /!\\ \n");
             System.out.println("Accout: " + this.account);
             System.out.println("Salary: " + this.salary);
             System.out.println("Bonus: " + this.bonus);
-            System.out.println("Total: " + this.total);
+            System.out.println("Total: " + this.getTotal());
         }
         if(print_org_det)
         {
-            System.out.println("--- Organization Details ---");
             this.org.pPrint(false);
         }
         System.out.println();
@@ -213,12 +213,12 @@ public class Employee implements BaseEmployee, Serializable
         this.ioe.save();
     }
 
-    public void serialize()
+    public void serialize(String path)
     {
         String filename = this.name + ".ser";
         try
         {
-            FileOutputStream file = new FileOutputStream(filename);
+            FileOutputStream file = new FileOutputStream(path + "\\" + filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
             
             out.writeObject(this); 
@@ -234,11 +234,31 @@ public class Employee implements BaseEmployee, Serializable
         }
     }
 
-    public static Employee deserialize(String filename)
+    public void serialize(String path, String filename)
     {
         try
         {
-            FileInputStream file = new FileInputStream(filename);
+            FileOutputStream file = new FileOutputStream(path + "\\" + filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            
+            out.writeObject(this); 
+            
+            out.close(); 
+            file.close(); 
+            
+            System.out.println("Object has been serialized");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static Employee deserialize(String path, String filename)
+    {
+        try
+        {
+            FileInputStream file = new FileInputStream(path + filename);
             ObjectInputStream in = new ObjectInputStream(file);
             
             Employee e = (Employee)in.readObject();

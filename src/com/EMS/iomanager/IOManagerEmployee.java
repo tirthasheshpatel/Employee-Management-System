@@ -138,7 +138,7 @@ public class IOManagerEmployee implements IOManager
         contentBuff.append("\nName: " + emp.getName());
         contentBuff.append("\nID: " + emp.getId());
         contentBuff.append("\nAddress: " + emp.getAddress());
-        contentBuff.append("\nOrganization: " + emp.getOrg());
+        contentBuff.append("\nOrganization: " + emp.getOrg().getName());
         contentBuff.append("\nOccupation: " + emp.getOccupation());
         contentBuff.append("\nAccount: " + emp.getAccount());
         contentBuff.append("\nSalary: " + emp.getSalary());

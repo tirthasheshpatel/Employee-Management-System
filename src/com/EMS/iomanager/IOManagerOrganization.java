@@ -152,9 +152,9 @@ public class IOManagerOrganization implements IOManager
         for(int i=0;i<org.getNumAppointed();i++)
         {
             contentBuff.append("\nname: " + e[i].getName() + ", ");
-            contentBuff.append("id: " + e[i].getId() + ", more details in the file: " + e[i].getId() + ".txt");
-            IOManagerEmployee ioe = new IOManagerEmployee(this.path, e[i].getId()+".txt", e[i]);
-            ioe.save();
+            contentBuff.append("id: " + e[i].getId());
+            // IOManagerEmployee ioe = new IOManagerEmployee(this.path, e[i].getId()+".txt", e[i]);
+            // ioe.save();
         }
         content = contentBuff.toString();
         this.writeToFile(content);

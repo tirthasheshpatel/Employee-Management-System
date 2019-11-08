@@ -257,6 +257,7 @@ public class Organization implements BaseOrganization, Serializable
 
     public void pPrint(boolean print_employee_det)
     {
+        System.out.println("\n---Organization Details---\n");
         System.out.println("Organization: " + this.name);
         System.out.println("Date of Establishment: " + this.date);
         System.out.println("Address: " + this.address);
@@ -264,6 +265,8 @@ public class Organization implements BaseOrganization, Serializable
         System.out.println("Size of company: " + this.numEmployees + " employees");
         System.out.println("Number of Appointed employees: " + this.numAppointed);
         System.out.println("Number of Vacant seats: " + this.numVacant);
+        System.out.println();
+        System.out.println("---Employee Details---\n");
         if(print_employee_det && this.numAppointed != 0)
         {
             e[0].pPrint(false, false);
@@ -284,20 +287,40 @@ public class Organization implements BaseOrganization, Serializable
         this.ioo.save();
     }
 
-    public void serialize()
+    public void serialize(String path)
     {
         String filename = this.name + ".ser";
         try
         {
-            FileOutputStream file = new FileOutputStream(filename);
+            FileOutputStream file = new FileOutputStream(path + "\\" + filename);
             ObjectOutputStream out = new ObjectOutputStream(file);
             
             out.writeObject(this);
             
-            out.close(); 
-            file.close(); 
+            out.close();
+            file.close();
             
-            System.out.println("Object has been serialized"); 
+            System.out.println("Object has been serialized");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void serialize(String path, String filename)
+    {
+        try
+        {
+            FileOutputStream file = new FileOutputStream(path + "\\" + filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            
+            out.writeObject(this);
+            
+            out.close();
+            file.close();
+            
+            System.out.println("Object has been serialized");
         }
         catch(Exception e)
         {
