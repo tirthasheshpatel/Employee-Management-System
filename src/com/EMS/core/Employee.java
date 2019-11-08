@@ -45,12 +45,10 @@ public class Employee implements BaseEmployee, Serializable
     private String account;
     private double salary;
     private double bonus;
-    private double total;
     private boolean status;
     transient private IOManagerEmployee ioe;
 
-    public Employee()
-    {
+    public Employee() {
         this.name = "<employee-placeholder>";
         this.id = "<employee-placeholder>";
         this.address = "<employee-placeholder>";
@@ -59,7 +57,6 @@ public class Employee implements BaseEmployee, Serializable
         this.account = "xxxx-xxxx-xxxx-xxxx";
         this.salary = 0.;
         this.bonus = 0.;
-        this.total = this.salary + this.bonus;
         this.status = false;
     }
 
