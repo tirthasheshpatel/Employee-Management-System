@@ -1,3 +1,4 @@
+language: java
 sudo: false # faster builds
 
 after_success:
