@@ -255,7 +255,7 @@ public class Employee implements BaseEmployee, Serializable
     {
         try
         {
-            FileInputStream file = new FileInputStream(path + filename);
+            FileInputStream file = new FileInputStream(path + "\\" + filename);
             ObjectInputStream in = new ObjectInputStream(file);
             
             Employee e = (Employee)in.readObject();
