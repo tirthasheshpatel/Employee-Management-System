@@ -1,12 +1,12 @@
-Last Modified: Fri Nov 08 20:54:43 IST 2019
+Last Modified: Sat Nov 09 19:52:01 IST 2019
 
  --- Employee Details ---
-Name: Tirth is the best
+Name: Tirth Patel
 ID: 123
-Address: NYC, USA
+Address: Burj Khalifa, USA
 Organization: Google
-Occupation: ML Engineer
-Account: 39183r4234
-Salary: 10000.0
+Occupation: 
+Account: 10
+Salary: 100000.0
 Bonus: 1000.0
-Total: 11000.0
+Total: 101000.0
