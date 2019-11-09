@@ -6,9 +6,9 @@ public class Menu
 {
     public static void main(String[] args) throws IOException, InterruptedException 
     {
-        try 
+        try
         {
-            BufferedReader license_file = new BufferedReader(new FileReader( new File("../LICENSE")));
+            BufferedReader license_file = new BufferedReader(new FileReader( new File("../../LICENSE")));
             String license = "";
             String line = "";
             while((line = license_file.readLine()) != null)
