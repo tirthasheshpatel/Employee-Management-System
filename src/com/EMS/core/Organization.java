@@ -255,6 +255,41 @@ public class Organization implements BaseOrganization, Serializable
         return this.e;
     }
 
+    public void removeEmployee(String id)
+    {
+        if(null == this.e)
+        {
+            System.out.println("\nNo employees present in the company.\n");
+            return;
+        }
+        else if(this.numAppointed == 0)
+        {
+            System.out.println("\nNo employees appointed in the company.\n");
+            return;
+        }
+        Employee e_new[] = new Employee[this.numEmployees];
+        int j=0;
+        boolean deleted = false;
+        for(int i=0;i<numAppointed;i++)
+        {
+            if(e[i].getId().equals(id))
+            {
+                deleted = true;
+                continue;
+            }
+            e_new[j++] = this.e[i];
+        }
+        if(!deleted)
+        {
+            System.out.println("Employee not found!");
+            return;
+        }
+        this.e = e_new;
+        this.numAppointed = j;
+        this.numVacant = this.numEmployees - this.numAppointed;
+        return;
+    }
+
     public void pPrint(boolean print_employee_det)
     {
         System.out.println("\n---Organization Details---\n");
@@ -266,9 +301,9 @@ public class Organization implements BaseOrganization, Serializable
         System.out.println("Number of Appointed employees: " + this.numAppointed);
         System.out.println("Number of Vacant seats: " + this.numVacant);
         System.out.println();
-        System.out.println("---Employee Details---\n");
         if(print_employee_det && this.numAppointed != 0)
         {
+            System.out.println("---Employee Details---\n");
             e[0].pPrint(false, false);
             if(this.numAppointed == 1) return;
             System.out.println(".");
@@ -328,11 +363,11 @@ public class Organization implements BaseOrganization, Serializable
         }
     }
 
-    public static Organization deserialize(String filename)
+    public static Organization deserialize(String path, String filename)
     {
         try
         {
-            FileInputStream file = new FileInputStream(filename);
+            FileInputStream file = new FileInputStream(path + "\\" + filename);
             ObjectInputStream in = new ObjectInputStream(file);
             
             Organization org = (Organization)in.readObject();
