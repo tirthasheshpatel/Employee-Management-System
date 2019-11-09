@@ -4,3 +4,4 @@ docs/
 .classpath
 .gradle/
 bin/
+.vscode/
