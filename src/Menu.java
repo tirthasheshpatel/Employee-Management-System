@@ -36,8 +36,6 @@ public class Menu
             return;
         }
 
-        System.out.println("#### Employee Management System ####");
-        System.out.println("########### Version 1.0 ############");
         System.out.println();
 
         Organization org[] = new Organization[1000];
@@ -77,6 +75,8 @@ public class Menu
     {
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("                     #### Employee Management System ####                    ");
+        System.out.println("                     ########### Version 1.0 ############                    ");
         System.out.println("Enter 1 to register organization.");
         System.out.println("Enter 2 to register employee.");
         System.out.println("Enter 3 to remove an organization.");
@@ -87,7 +87,7 @@ public class Menu
         System.out.println("Enter 8 to save all the employees.");
         System.out.println("Enter 9 to retrive all the previously stored employees and organizations.");
         System.out.println("Enter 10 to clear console.");
-        System.out.println("Enter any number >9 to exit.");
+        System.out.println("Enter any number >11 to exit.");
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println();
         System.out.print("Enter command: ");
@@ -111,16 +111,40 @@ public class Menu
         newOrg.setName(name);
         System.out.print("Enter the link to organization webpage: ");
         String link = in.nextLine();
-        newOrg.setLink(link);
+        try
+        {
+            newOrg.setLink(link);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return numOrganizationsRegistered;
+        }
         System.out.print("Enter the address of the company: ");
         String address = in.nextLine();
         newOrg.setAddress(address);
         System.out.print("Enter the number of employees in the company: ");
         int numEmployees = in.nextInt();in.nextLine();
-        newOrg.setNumEmployees(numEmployees);
+        try
+        {
+            newOrg.setNumEmployees(numEmployees);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return numOrganizationsRegistered;
+        }
         System.out.print("Enter the date of establishment: (dd/MM/yyyy) ");
         String date = in.nextLine();
-        newOrg.setDateOfEstablishment(date, "dd/MM/yyyy");
+        try
+        {
+            newOrg.setDateOfEstablishment(date, "dd/MM/yyyy");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return numOrganizationsRegistered;
+        }
         System.out.println("\nOrganization registered successfully!\n");
         org[numOrganizationsRegistered] = newOrg;
         return ++numOrganizationsRegistered;

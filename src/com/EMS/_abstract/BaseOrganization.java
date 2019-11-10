@@ -32,6 +32,9 @@ package com.EMS._abstract;
 import java.util.Date;
 
 import com.EMS.core.Employee;
+import com.EMS.exceptions.IllegalCallException;
+import com.EMS.exceptions.NoVacancyException;
+import com.EMS.exceptions.ValidationFailedException;
 
 
 /**
@@ -67,7 +70,7 @@ public interface BaseOrganization
      * @param link link to organization page.
      * @throws IllegalArgumentException error is thrown if the link validation fails
      */
-    public void setLink(String link);
+    public void setLink(String link) throws ValidationFailedException;
 
     /**
      * Get the link to organization webpage.
@@ -90,10 +93,10 @@ public interface BaseOrganization
     /**
      * Set the number of employees in the organization.
      * @param numEmployees number of employees in the organization.
-     * @throws IllegalArgumentException if a negative number is passed as argument.
-     * @throws IllegalArgumentException if the new size is less than number of appointed employees.
+     * @throws ValidationFailedException if a negative number is passed as argument or
+     * if the new size is less than number of appointed employees.
      */
-    public void setNumEmployees(int numEmployees);
+    public void setNumEmployees(int numEmployees) throws ValidationFailedException;
 
     /**
      * Get the number of employees in the organization.
@@ -106,10 +109,10 @@ public interface BaseOrganization
      * Format: All supported formats of {@link java.util.Date}.
      * @param date date of establishment.
      * @param format format of passed date.
-     * @throws IllegalArgumentException if the format validation fails.
+     * @throws ValidationFailedException if the format validation fails.
      * @see java.util.Date
      */
-    public void setDateOfEstablishment(String date, String format);
+    public void setDateOfEstablishment(String date, String format) throws ValidationFailedException;
 
     /**
      * Get the date of establishment of the organization.
@@ -123,12 +126,11 @@ public interface BaseOrganization
      * Details of all the employees are stored in
      * an array.
      * @param emp Appointed employee.
-     * @throws IllegalStateException If no vacant seats are present.
-     * @throws IllegalStateException if the array is not initialized
-     * by calling the method setNumEmployees
+     * @throws IllegalCallException if the employee array is not initialized by calling the method setNumEmployees
+     * @throws NoVacancyException If no vacant seats are present.
      * @throws IllegalArgumentException If employee with same id exists.
      */
-    public void setEmployeeDetails(Employee emp);
+    public void setEmployeeDetails(Employee emp) throws NoVacancyException, IllegalCallException;
 
     /**
      * Get the array of appointed employees.
