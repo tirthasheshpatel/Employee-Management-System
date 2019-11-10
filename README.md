@@ -42,6 +42,7 @@
   
 **6. Multiple Inheitance.**
   - Perform multiple inheritance in several classes to demonstrate and test the behaviour of different classes and their objects.
+  
 **7. Polymorphism or Method Overriding.**
   - Use the concepts of method overriding to perform Polymorphism.
   
