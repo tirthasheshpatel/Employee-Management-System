@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 
 import com.EMS._abstract.BaseOrganization;
 import com.EMS.iomanager.IOManagerOrganization;
+import com.EMS.exceptions.*;
 
 /**
  * 
@@ -68,7 +69,7 @@ public class Organization implements BaseOrganization, Serializable
         this.ioo = null;
     }
 
-    public Organization(String name, String link, String address, int numEmployees, String date, String format) {
+    public Organization(String name, String link, String address, int numEmployees, String date, String format) throws ValidationFailedException{
         this.setName(name);
         this.setLink(link);
         this.setAddress(address);
@@ -97,12 +98,12 @@ public class Organization implements BaseOrganization, Serializable
         return this.name;
     }
 
-    public void setLink(String link)
+    public void setLink(String link) throws ValidationFailedException
     {
         String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
         if(!validateLink(link, regex))
         {
-            throw new IllegalArgumentException("Link validation failed! Check format and try again...");
+            throw new ValidationFailedException("Link validation failed! Check format and try again...");
         }
         this.link = link;
     }
@@ -136,10 +137,10 @@ public class Organization implements BaseOrganization, Serializable
         return this.address;
     }
 
-    public void setNumEmployees(int numEmployees)
+    public void setNumEmployees(int numEmployees) throws ValidationFailedException
     {
         if(!this.validateNumEmployees(numEmployees))
-            throw new IllegalArgumentException("Validation of parameter `numEmployees` failed!");
+            throw new ValidationFailedException("Validation of parameter `numEmployees` failed!");
         this.numEmployees = numEmployees;
         if(null == this.e)
         {
@@ -153,7 +154,7 @@ public class Organization implements BaseOrganization, Serializable
             if(this.numEmployees <= this.numAppointed)
             {
                 this.numEmployees = this.e.length;
-                throw new IllegalArgumentException("New employee size can't be less than appointed emploees!");
+                throw new ValidationFailedException("New employee size can't be less than appointed emploees!");
             }
             else
             {
@@ -180,7 +181,7 @@ public class Organization implements BaseOrganization, Serializable
         return true;
     }
 
-    public void setDateOfEstablishment(String date, String format)
+    public void setDateOfEstablishment(String date, String format) throws ValidationFailedException
     {
         try
         {
@@ -188,7 +189,7 @@ public class Organization implements BaseOrganization, Serializable
         }
         catch(Exception exp)
         {
-            throw new IllegalArgumentException("Date Validation falied! Check format and try again...");
+            throw new ValidationFailedException("Date Validation falied! Check format and try again...");
         }
     }
 
@@ -197,17 +198,17 @@ public class Organization implements BaseOrganization, Serializable
         return this.date;
     }
 
-    public void setEmployeeDetails(Employee emp)
+    public void setEmployeeDetails(Employee emp) throws NoVacancyException, IllegalCallException
     {
         if(0 == this.numVacant)
         {
             System.out.println("Oopsie Daisy!");
-            throw new IllegalStateException("No vacant spaces left as of now! Please apply again later...");
+            throw new NoVacancyException("No vacant spaces left as of now! Please apply again later...");
         }
         else if(null == this.e)
         {
             String msg = "First call the method `setNumEmployees` of this class to initialize the employee array!";
-            throw new IllegalStateException(msg);
+            throw new IllegalCallException(msg);
         }
         else
         {
@@ -225,7 +226,7 @@ public class Organization implements BaseOrganization, Serializable
         this.e[numAppointed-1] = emp;
     }
 
-    public Employee searchEmployeeById(String id)
+    public Employee searchEmployeeById(String id) throws IllegalArgumentException
     {
         for(int i=0;i<this.numAppointed;i++)
         {
@@ -237,7 +238,7 @@ public class Organization implements BaseOrganization, Serializable
         throw new IllegalArgumentException("Employee with id " + id + " not found in the database of organization " + this.name);
     }
 
-    public Employee searchEmployeeByName(String name)
+    public Employee searchEmployeeByName(String name) throws IllegalArgumentException
     {
         name = name.toLowerCase();
         for(int i=0;i<this.numAppointed;i++)

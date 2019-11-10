@@ -109,7 +109,14 @@ public class Employee implements BaseEmployee, Serializable
     public void setOrg(Organization org)
     {
         this.org = org;
-        org.setEmployeeDetails(this);
+        try
+        {
+            org.setEmployeeDetails(this);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getId()
